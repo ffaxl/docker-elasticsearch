@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ x"$1" = x"sh" -o x"$1" = x"bash" ]; then
+  exec $@
+  exit
+fi
+
+chown -R elasticsearch:elasticsearch /elasticsearch
+
+[ ! -e /elasticsearch/config/elasticsearch.yml ] \
+  && echo "Generating configs" \
+  && cp -R /elasticsearch/config.orig/* /elasticsearch/config/
+
+chown -R elasticsearch:elasticsearch /elasticsearch
+
+exec su elasticsearch -c "elasticsearch/bin/elasticsearch $@"
