@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     && addgroup -S elasticsearch \
     && adduser -g '&' -s /bin/bash -G elasticsearch -S elasticsearch \
     && mkdir /elasticsearch \
-    && wget -qO - `wget -qO - https://www.elastic.co/downloads/elasticsearch | grep -Eo 'https://.*?/elasticsearch-.*?.tar.gz'` | tar xzf - --strip-components=1 -C /elasticsearch \
+    && wget -qO - `wget -qO - https://www.elastic.co/downloads/elasticsearch | grep -Eo 'https://.*?/elasticsearch-.*?.tar.gz' | head -1` | tar xzf - --strip-components=1 -C /elasticsearch \
     && sed -i 's|^#*network.host:: .*$|network.host:: 0.0.0.0|g' /elasticsearch/config/elasticsearch.yml \
     && mv /elasticsearch/config /elasticsearch/config.orig \
     && mkdir /elasticsearch/config
