@@ -26,5 +26,4 @@ VOLUME /elasticsearch/config
 VOLUME /elasticsearch/data
 VOLUME /elasticsearch/logs
 
-#ENTRYPOINT /entry
-ENTRYPOINT /bin/bash
+ENTRYPOINT /entry
