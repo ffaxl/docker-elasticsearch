@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/* \
     && wget -qO - `wget -qO - https://www.elastic.co/downloads/elasticsearch | grep -Eo 'https://.*?/elasticsearch-.*?.tar.gz' | head -1` | tar xzf - --strip-components=1 -C /elasticsearch \
     && sed -i 's|^#*network.host: .*$|network.host: 0.0.0.0|g' /elasticsearch/config/elasticsearch.yml \
     && mv /elasticsearch/config /elasticsearch/config.orig \
-    && mkdir /elasticsearch/config
+    && mkdir /elasticsearch/config \
+    && chown -R elasticsearch:elasticsearch /elasticsearch
 
 COPY entry /
 
